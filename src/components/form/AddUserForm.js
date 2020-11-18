@@ -2,7 +2,7 @@ import React from 'react';
 
 import {makeStyles} from '@material-ui/core/styles';
 
-import {Field, Form, Formik} from 'formik';
+import {Field, Form, Formik,FormikBag, FormikValues, FormikConfig} from 'formik';
 
 import {TextField} from 'formik-material-ui';
 import Button from "@material-ui/core/Button";
@@ -48,7 +48,12 @@ const AddUserForm = (props) => {
     
     const classes = useStyles();
     
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
     
+    
+    /**
+     * @type FormikConfig
+     */
     const formikConfig = {
         
         initialValues: {
@@ -58,13 +63,23 @@ const AddUserForm = (props) => {
             birthday  : new Date(),
             phone     : '049 334 034'
         },
-        onSubmit     : async (values) => {
-            props.onFormikSubmit(values);
-            // setOkOpen(true);
-            await new Promise((r) => setTimeout(r, 4000));
-            // setOkOpen(false);
+        onSubmit     : async (values, formikBag) => {
+            
+            formikBag.setSubmitting(true);
+            
+            console.log("[AddUserForm] onSubmit: simulate external action. (2s wait)");
+            
+            await wait(2 * 1000);
+    
+            console.log("[AddUserForm] onSubmit: submit success, call parent callback");
+            
+            formikBag.setSubmitting(false);
+            props.onFormikSubmit(values, formikBag);
+            
         }
     }
+    
+    
     
     return (
       <>
@@ -106,7 +121,7 @@ const AddUserForm = (props) => {
                           <Field name="birthday"
                                  label="Date"
                                  format="MM/dd/yyyy"
-
+                          
                                  component={DatePicker}
                                  required
                           />

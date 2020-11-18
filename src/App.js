@@ -127,30 +127,7 @@ class App extends React.Component {
     }
     
     
-    // FORMIK METHODS
-    async handleFormikSubmit(values) {
-        console.log("_");
-        console.info("[App.js] handleFormikSubmit ", values);
-        console.log(">> submit : begin");
     
-    
-        // fix date
-       
-        
-        this.setOkOpen(true);
-        await new Promise((r) => setTimeout(r, 4000));
-        console.log(">> submit : completed;", "\\n");
-        this.setOkOpen(false);
-        this.setFormOpen(false);
-    
-    
-        // let dt = new Date();
-        let dt      = values.birthday;
-        let fixed = [dt.getMonth(),dt.getDate(),dt.getFullYear()].join('/');
-        values.birthday = fixed;
-        this.handleTestSubmit(values);
-    
-    }
     
     
     // OK DIALOG
@@ -207,13 +184,41 @@ class App extends React.Component {
         console.log("New resulting state", this.state);
     }
     
-    
-    handleTestSubmit(values) {
-        console.warn("[App.js] handleTestSubmit", {values: values, scope: this});
+    // actions
+    onFormikFormSubmit(values) {
         
-        let user = this.createUser();
-        user = Object.assign(user, values)
+        let dt, fixed;
+        
+        console.info("[App] onFormikFormSubmit", {values: values, scope: this});
+    
+        // fixing date to match data model.
+        
+        // dt = new Date();
+        dt              = values.birthday;
+        fixed           = [dt.getMonth(),dt.getDate(),dt.getFullYear()].join('/');
+        values.birthday = fixed;
+        
+        // pass an object copy.
+        const user = Object.assign({}, this.createUser())
         this.addUser(user);
+    }
+    
+    // FORMIK METHODS
+    async handleFormikSubmit(values,formikBag) {
+        
+        console.log("_");
+        console.info("[App.js] handleFormikSubmit ", values);
+    
+        this.setFormOpen(false);
+        
+        // wait for user feedback
+        this.setOkOpen(true);
+        await new Promise((r) => setTimeout(r, 4000));
+        this.setOkOpen(false);
+        
+        
+        this.onFormikFormSubmit(values);
+        
     }
     
     
