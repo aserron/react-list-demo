@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -32,11 +32,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function HeaderAppBar(props) {
-    
-    console.info('[HeaderAppBar] fn > props:',props);
-    
+function HeaderAppBar(props) {
+
     const classes = useStyles();
+
+    const onAddUser = props.handleAddUser;
+
+    console.debug('[HeaderAppBar] Render:',props);
 
     return (
 
@@ -50,7 +52,7 @@ export default function HeaderAppBar(props) {
                         User List
                     </Typography>
 
-                    <AddUserBtn classes={classes} handleAddUser={props.handleAddUser} />
+                    <AddUserBtn classes={classes} handleAddUser={onAddUser} />
 
                 </Toolbar>
 
@@ -58,3 +60,6 @@ export default function HeaderAppBar(props) {
         </Container>
     );
 }
+
+
+export default React.memo(HeaderAppBar);

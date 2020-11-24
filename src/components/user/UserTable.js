@@ -12,11 +12,11 @@ import Paper from '@material-ui/core/Paper';
 import {Container} from "@material-ui/core";
 
 const useStyles = makeStyles(
-  {
-      table: {
-          minWidth: 650,
-      },
-  });
+    {
+        table: {
+            minWidth: 650,
+        },
+    });
 
 function createData(id, first_name, last_name, email, birthday, phone) {
     return {id, first_name, last_name, email, birthday, phone};
@@ -24,32 +24,32 @@ function createData(id, first_name, last_name, email, birthday, phone) {
 
 const rows = [
     createData(
-      {
-          "id"        : 1,
-          "first_name": "Brand",
-          "last_name" : "New",
-          "email"     : "brand@columbia.edu",
-          "birthday"  : "3/17/1979",
-          "phone"     : "204-472-9613"
-      })
+        {
+            "id"        : 1,
+            "first_name": "Brand",
+            "last_name" : "New",
+            "email"     : "brand@columbia.edu",
+            "birthday"  : "3/17/1979",
+            "phone"     : "204-472-9613"
+        })
 ]
 
 
 const DATE_NOW = new Date(Date.now());
 
 const getUserAge = (birthday) => {
-    
+
     const now = DATE_NOW;
-    
+
     if (!(birthday instanceof Date)) {
         birthday = new Date(birthday);
     }
-    
+
     var diff = (birthday.getTime() - now.getTime()) / 1000;
     diff /= (60 * 60 * 24);
-    
+
     return Math.abs(Math.floor(diff / 365.25));
-    
+
 }
 
 const isAdult = (date) => {
@@ -61,42 +61,42 @@ const isAdult = (date) => {
 
 
 export default function UserTable(props) {
-    
-    
+
+
     const classes = useStyles();
-    
+
     return (
-      <Container>
-          <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                      <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell align="left">First Name</TableCell>
-                          <TableCell align="left">Last Name</TableCell>
-                          <TableCell align="left">Email</TableCell>
-                          <TableCell align="left">Birthday</TableCell>
-                          <TableCell align="left">+18</TableCell>
-                          <TableCell align="left">Phone</TableCell>
-                      </TableRow>
-                  </TableHead>
-                  <TableBody>
-                      {props.data.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell component="th" scope="row">
-                                {row.id}
-                            </TableCell>
-                            <TableCell align="left">{row.first_name}</TableCell>
-                            <TableCell align="left">{row.last_name}</TableCell>
-                            <TableCell align="left">{row.email}</TableCell>
-                            <TableCell align="left">{row.birthday}</TableCell>
-                            <TableCell align="left">{isAdult(row.birthday) ? 'YES' : 'NO'}</TableCell>
-                            <TableCell align="left">{row.phone}</TableCell>
+        <Container>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell align="left">First Name</TableCell>
+                            <TableCell align="left">Last Name</TableCell>
+                            <TableCell align="left">Email</TableCell>
+                            <TableCell align="left">Birthday</TableCell>
+                            <TableCell align="left">+18</TableCell>
+                            <TableCell align="left">Phone</TableCell>
                         </TableRow>
-                      ))}
-                  </TableBody>
-              </Table>
-          </TableContainer>
-      </Container>
+                    </TableHead>
+                    <TableBody>
+                        {props.data.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                                <TableCell align="left">{row.first_name}</TableCell>
+                                <TableCell align="left">{row.last_name}</TableCell>
+                                <TableCell align="left">{row.email}</TableCell>
+                                <TableCell align="left">{row.birthday}</TableCell>
+                                <TableCell align="left">{isAdult(row.birthday) ? 'YES' : 'NO'}</TableCell>
+                                <TableCell align="left">{row.phone}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Container>
     );
 }
