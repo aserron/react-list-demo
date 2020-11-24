@@ -9,12 +9,10 @@ import data from "./data/users.json";
 import './index.css';
 
 ReactDOM.render(
-  
-      
-      <App users={data} modalOpen={false} />
-  
-  ,
-  document.getElementById('root')
+
+    <App users={data} modalOpen={false} />
+    ,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
