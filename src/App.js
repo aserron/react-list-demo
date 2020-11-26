@@ -1,19 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Container} from "@material-ui/core";
 
 import UserTable from "./components/user/UserTable";
-import HeaderAppBar from "./components/header/HeaderAppBar";
-import ConfirmDialog from "./components/modal/ConfirmDialog";
-import AddUserDialog from "./components/modal/AddUserDialog";
+import HeaderAppBar from "./components/layout/AppHeaderBar";
+import ConfirmDialog from "./components/user/ConfirmDialog";
+import AddUserDialog from "./components/user/AddUserDialog";
 
+
+import {ThemeProvider} from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import theme from './theme'
+import AppFooter from "./components/layout/AppFooter";
+
+
+// temp theme style
 const styles = theme => ({
-    tempFormCt: {
-        background  : 'red solid',
-        alignContent: "stretch"
+
+        root: {
+            margin: theme.spacing(3),
+            width: 345,
+        },
+        tempFormCt: {
+            background: 'red solid',
+            alignContent: "stretch"
+        },
+        appUserTable: {
+
+            marginBottom: theme.spacing(4),
+
+        }
     }
-});
+);
+
 
 class App extends React.Component {
 
@@ -22,8 +43,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            users   : [],
-            okOpen  : false,
+            users: [],
+            okOpen: false,
             formOpen: false,
 
         }
@@ -46,14 +67,13 @@ class App extends React.Component {
         this.testAdd = this.testAdd.bind(this);
         // this.handleFormSubmit   = this.handleFormSubmit.bind(this);
 
-        console.debug("[App] constructor", {props:props,this: this});
+        console.debug("[App] constructor", {props: props, this: this});
     }
 
     // lifecyle methods..
 
     // here we should perform an ajax call instead we load dummy
     componentDidMount() {
-
 
 
         const list = [...this.props.users];
@@ -71,12 +91,12 @@ class App extends React.Component {
     // User List Methods
     createUser() {
         const baseUser = {
-            "id"        : this.state.users.length + 1,
+            "id": this.state.users.length + 1,
             "first_name": "Brand",
-            "last_name" : "New",
-            "email"     : "brand@columbia.edu",
-            "birthday"  : "3/17/1979",
-            "phone"     : "204-472-9613"
+            "last_name": "New",
+            "email": "brand@columbia.edu",
+            "birthday": "3/17/1979",
+            "phone": "204-472-9613"
         };
 
         return Object.assign({}, baseUser);
@@ -131,8 +151,8 @@ class App extends React.Component {
         this.setFormOpen(false);
 
         // fix date for list format.
-        let dt      = values.birthday;
-        let fixed = [dt.getMonth(),dt.getDate(),dt.getFullYear()].join('/');
+        let dt = values.birthday;
+        let fixed = [dt.getMonth(), dt.getDate(), dt.getFullYear()].join('/');
         values.birthday = fixed;
 
         // forward action.
@@ -177,8 +197,8 @@ class App extends React.Component {
         console.info("[App] handleFormSubmit", {values: values, scope: this});
 
         let user;
-        user     = this.createUser();
-        user     = Object.assign(user, values)
+        user = this.createUser();
+        user = Object.assign(user, values)
         this.addUser(user);
 
 
@@ -188,7 +208,9 @@ class App extends React.Component {
         // close modal after 2s.
         (new Promise((r) => setTimeout(r, 2000)))
             .then(
-                () =>{this.setOkOpen(false);}
+                () => {
+                    this.setOkOpen(false);
+                }
             );
 
     }
@@ -218,27 +240,34 @@ class App extends React.Component {
     // Component Render
     render() {
 
-        console.debug("[App]",' render:', {
+        const {classes} = this.props;
+
+
+        console.debug("[App]", ' render:', {
             "state.users": this.state.users,
             "props.users": this.props.users
         });
 
         return (
-            <div className={styles.root}>
 
-                <Container component="header">
+            <ThemeProvider theme={theme}>
+
+                <CssBaseline/>
+
+                <Container>
+
+
                     <HeaderAppBar handleAddUser={this.handleFormOpen}/>
-                </Container>
 
 
-                <Container component="main">
+                    <Container component="main" disableGutters={true} className={classes.appUserTable}>
+                        <UserTable data={this.state.users}/>
 
-                    <UserTable data={this.state.users}/>
-                </Container>
+                    </Container>
 
 
-                <Container component="footer" style={{padding: 20}}>
-                    <Container><h3>Welcome user!</h3></Container>
+                    <AppFooter/>
+
                 </Container>
 
 
@@ -252,12 +281,13 @@ class App extends React.Component {
 
                                handleFormikSubmit={this.handleFormikSubmit}
 
-                               title          ='Add User'
-                               description    =''
+                               title='Add User'
+                               description=''
                 />
 
 
-            </div>
+            </ThemeProvider>
+
         );
 
     }

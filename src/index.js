@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import App from "./App";
 import data from "./data/users.json";
 
-import './index.css';
+// import './index.css';
 
 ReactDOM.render(
 
