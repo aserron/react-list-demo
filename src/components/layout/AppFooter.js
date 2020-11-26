@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
     appBar: {
-        position:'relative',
+        position: 'relative',
         top: 'auto',
         bottom: 0,
     },
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AppFooter() {
+export default function AppFooter(props) {
 
     const classes = useStyles();
 
@@ -51,18 +51,23 @@ export default function AppFooter() {
 
             <AppBar position="fixed" color="primary" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="open drawer">
-                        <MenuIcon />
+                    <IconButton edge="start" color="inherit" aria-label="open drawer" disabled>
+                        <MenuIcon/>
                     </IconButton>
-                    <Fab color="secondary" aria-label="add" className={classes.fabButton}>
-                        <AddIcon />
+                    <Fab
+                        onClick={props.onAddUser}
+                        color="secondary"
+                        aria-label="add"
+                        className={classes.fabButton}
+                    >
+                        <AddIcon/>
                     </Fab>
-                    <div className={classes.grow} />
-                    <IconButton color="inherit">
-                        <SearchIcon />
+                    <div className={classes.grow}/>
+                    <IconButton color="inherit" disabled>
+                        <SearchIcon/>
                     </IconButton>
-                    <IconButton edge="end" color="inherit">
-                        <MoreIcon />
+                    <IconButton edge="end" color="inherit" disabled>
+                        <MoreIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>

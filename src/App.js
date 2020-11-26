@@ -29,7 +29,7 @@ const styles = theme => ({
         },
         appUserTable: {
 
-            marginBottom: theme.spacing(4),
+            marginBottom: theme.spacing(5),
 
         }
     }
@@ -266,7 +266,7 @@ class App extends React.Component {
                     </Container>
 
 
-                    <AppFooter/>
+                    <AppFooter onAddUser={this.handleFormOpen}/>
 
                 </Container>
 
