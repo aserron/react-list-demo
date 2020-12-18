@@ -87,7 +87,7 @@ export default function UserTable(props) {
 
     return (
 
-        <TableContainer component={Paper}  >
+        <TableContainer component={Paper}>
             <Table className={classes.table}
                    size={dense ? 'small' : 'medium'}
                    aria-label="simple table">
@@ -103,19 +103,25 @@ export default function UserTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.data.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell component="th" scope="row">
-                                {row.id}
-                            </TableCell>
-                            <TableCell align="left">{row.first_name}</TableCell>
-                            <TableCell align="left">{row.last_name}</TableCell>
-                            <TableCell align="left">{row.email}</TableCell>
-                            <TableCell align="left">{row.birthday}</TableCell>
-                            <TableCell align="left">{isAdult(row.birthday) ? 'YES' : 'NO'}</TableCell>
-                            <TableCell align="left">{row.phone}</TableCell>
-                        </TableRow>
-                    ))}
+                    {
+                        (props.data.length > 0) ? props.data.map(
+
+                            (row) => (
+                                <TableRow key={row.id}>
+                                    <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell>
+                                    <TableCell align="left">{row.first_name}</TableCell>
+                                    <TableCell align="left">{row.last_name}</TableCell>
+                                    <TableCell align="left">{row.email}</TableCell>
+                                    <TableCell align="left">{row.birthday}</TableCell>
+                                    <TableCell align="left">{isAdult(row.birthday) ? 'YES' : 'NO'}</TableCell>
+                                    <TableCell align="left">{row.phone}</TableCell>
+                                </TableRow>
+                            )
+
+                        ) : null
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
