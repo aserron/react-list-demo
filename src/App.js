@@ -17,6 +17,9 @@ import theme from './theme'
 import AppFooter from "./components/app/AppFooter";
 
 
+import axios from 'axios';
+
+
 // temp theme style
 const styles = theme => ({
 
@@ -71,25 +74,40 @@ class App extends React.Component {
         console.debug("[App] constructor", {props: props, this: this});
     }
 
-    // lifecyle methods..
+    //
+    // REACT lifecyle methods..
 
     // here we should perform an ajax call instead we load dummy
     componentDidMount() {
 
+        axios.get(`http://localhost:3000/data/users.json`)
+            .then(res => {
+
+                console.debug('[App] > componentDidMount > AXIOS get:', (res));
+
+                const list = res.data;
+                this.setState({users: list});
+
+
+
+            })
+
+
+        // old local data version
+        // const list = [...this.props.users];
+        // this.setState({users: list});
 
         const list = [...this.props.users];
-
-        this.setState({users: list});
-
         // console.clear();
         console.debug('[App] > componentDidMount loading list:', (list));
-
     }
 
-    // eo lifecyle
+    // // EO lifecyle methods
 
-
+    //
     // User List Methods
+
+
     createUser() {
         const baseUser = {
             "id": this.state.users.length + 1,
@@ -257,7 +275,7 @@ class App extends React.Component {
 
                 <Container>
 
-                    <HeaderAppBar />
+                    <HeaderAppBar/>
 
 
                     <AppHeaderBar handleAddUser={this.handleFormOpen}/>

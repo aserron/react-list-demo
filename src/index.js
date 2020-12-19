@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 import App from "./App";
-import data from "./data/users.json";
+// import data from "./data/users.json";
 
 // import './index.css';
+
+const data = [];
 
 ReactDOM.render(
 
