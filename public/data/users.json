@@ -1,0 +1,22 @@
+[{
+  "id": 1,
+  "first_name": "Vallie",
+  "last_name": "Boden",
+  "email": "vboden0@wikipedia.org",
+  "birthday": "5/12/2010",
+  "phone": "635-117-3162"
+}, {
+  "id": 2,
+  "first_name": "Theresa",
+  "last_name": "Piscotti",
+  "email": "tpiscotti1@bravesites.com",
+  "birthday": "4/14/2001",
+  "phone": "958-579-0930"
+}, {
+  "id": 3,
+  "first_name": "Antoni",
+  "last_name": "Chappelow",
+  "email": "achappelow2@alexa.com",
+  "birthday": "5/27/2008",
+  "phone": "545-996-3923"
+}]
