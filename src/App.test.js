@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import AddUserButton from "./components/layout/AddUserButton";
+import AddUserButton from "./components/user/form/AddUserButton";
 
 
 // Note: running cleanup afterEach is done automatically for you in @testing-library/react@9.0.0 or higher

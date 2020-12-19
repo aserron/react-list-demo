@@ -17,7 +17,7 @@ import DateFnsUtils from '@date-io/date-fns';
 
 
 // components
-import PhoneInput from "../form/PhoneInput";
+import PhoneInput from "../../common/form/PhoneInput";
 
 
 // helpers

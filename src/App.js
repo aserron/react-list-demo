@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Container} from "@material-ui/core";
 
-import UserTable from "./components/user/UserTable";
-import HeaderAppBar from "./components/layout/AppHeaderBar";
-import ConfirmDialog from "./components/user/ConfirmDialog";
-import AddUserDialog from "./components/user/AddUserDialog";
+import UserTable from "./components/user/UserTable/UserTable";
+import HeaderAppBar from "./components/app/HeaderAppBar";
+import AppHeaderBar from "./components/app/AppHeaderBar";
+import ConfirmDialog from "./components/user/AddUserDialog/ConfirmDialog";
+import AddUserDialog from "./components/user/AddUserDialog/AddUserDialog";
 
 
 import {ThemeProvider} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme'
-import AppFooter from "./components/layout/AppFooter";
+import AppFooter from "./components/app/AppFooter";
 
 
 // temp theme style
@@ -256,8 +257,10 @@ class App extends React.Component {
 
                 <Container>
 
+                    <HeaderAppBar />
 
-                    <HeaderAppBar handleAddUser={this.handleFormOpen}/>
+
+                    <AppHeaderBar handleAddUser={this.handleFormOpen}/>
 
 
                     <Container component="main" disableGutters={true} className={classes.appUserTable}>

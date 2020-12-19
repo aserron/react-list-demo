@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 // import TextField from "@material-ui/core/TextField";
 // import DialogActions from "@material-ui/core/DialogActions";
 import {Container} from "@material-ui/core";
-import AddUserButton from "./AddUserButton";
+import AddUserButton from "../user/form/AddUserButton";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 import AddIcon from '@material-ui/icons/Add';
